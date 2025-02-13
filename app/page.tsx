@@ -2,6 +2,7 @@
 
 import { useNoteContext } from "@/contexts/NotesContext"
 import { Save } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export default function NotetakeApp() {
   const { selectedNote, updateNote, saveNote } = useNoteContext()
@@ -9,8 +10,8 @@ export default function NotetakeApp() {
   return (
     <div className="">
       {selectedNote ? (
-        <>
-          <div className="flex justify-between items-center p-4 bg-white shadow-sm">
+        <div className="flex flex-col">
+          <div className="flex justify-between items-center p-4">
             <input
               type="text"
               value={selectedNote.title}
@@ -18,10 +19,11 @@ export default function NotetakeApp() {
               className="text-2xl font-semibold bg-transparent border-none outline-none"
               placeholder="Note title"
             />
-            <button onClick={saveNote} className="bg-blue-500 text-white px-4 py-2 rounded-md flex items-center">
+            <Button onClick={saveNote}>Save Note</Button>
+            {/* <button onClick={saveNote} className="bg-blue-500 text-white px-4 py-2 rounded-md flex items-center">
               <Save size={18} className="mr-2" />
               Save Note
-            </button>
+            </button> */}
           </div>
           <textarea
             value={selectedNote.content}
@@ -29,7 +31,7 @@ export default function NotetakeApp() {
             className="flex-1 p-4 text-lg bg-transparent border-none outline-none resize-none"
             placeholder="Start typing your note here..."
           />
-        </>
+        </div>
       ) : (
         <div className="flex items-center justify-center h-full text-gray-400">
           Select a note or create a new one

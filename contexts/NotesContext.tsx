@@ -13,6 +13,7 @@ interface NoteContextType {
   selectedNote: Note | null
   setSelectedNote: (note: Note | null) => void
   addNote: () => void
+  deleteNote: (note: Note) => void
   updateNote: (updatedNote: Note) => void
   saveNote: () => void
 }
@@ -42,6 +43,13 @@ export function NoteProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("notes", JSON.stringify(updatedNotes))
   }
 
+  const deleteNote = (note: Note) => {
+    const updatedNotes = notes.filter((n) => n.id !== note.id)
+    setNotes(updatedNotes)
+    setSelectedNote(null)
+    localStorage.setItem("notes", JSON.stringify(updatedNotes))
+  }
+
   const updateNote = (updatedNote: Note) => {
     const updatedNotes = notes.map((note) => (note.id === updatedNote.id ? updatedNote : note))
     setNotes(updatedNotes)
@@ -58,7 +66,7 @@ export function NoteProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <NoteContext.Provider value={{ notes, selectedNote, setSelectedNote, addNote, updateNote, saveNote }}>
+    <NoteContext.Provider value={{ notes, selectedNote, setSelectedNote, addNote, deleteNote, updateNote, saveNote }}>
       {children}
     </NoteContext.Provider>
   )

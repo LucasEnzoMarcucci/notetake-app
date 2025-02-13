@@ -47,7 +47,7 @@ const items = [
 ]
 
 export function AppSidebar() {
-  const { notes, selectedNote, setSelectedNote, addNote } = useNoteContext()
+  const { notes, selectedNote, setSelectedNote, addNote, deleteNote } = useNoteContext()
 
   return (
     <Sidebar variant="floating">
@@ -75,7 +75,7 @@ export function AppSidebar() {
                         </SidebarMenuAction>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent side="right" align="start">
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => deleteNote(note)}>
                           <span>Delete note</span>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
